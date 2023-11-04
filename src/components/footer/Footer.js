@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className='footer-container'>
       <footer className="footer">
-        <p>&copy; 2023 Furnish.ai by Ezekiel Ang. All rights reserved.</p>
+        <p>&copy; 2023 Aiyoh.ai by Ezekiel Ang. All rights reserved.</p>
         <p>Contact me at <span>hotwork.holdings@gmail.com</span> for business enquiries. </p>
       </footer>
     </div>
