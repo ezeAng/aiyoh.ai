@@ -47,8 +47,9 @@ function App() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.6}}
           >
-            <Typography sx={headerStyle} variant='h1' fontFamily={'Montserrat'} >Welcome to Furnish.AI</Typography>
-            <Typography variant='h4' fontFamily={'Montserrat'} >Begin your design journey here.</Typography>
+            <Typography sx={headerStyle} variant='h2' fontFamily={'Montserrat'} >Welcome to AIYOH</Typography>
+            <Typography variant='h4' fontFamily={'Montserrat'} gutterBottom>AI Invents Your Own Home!</Typography>
+            <Typography variant='h5' fontFamily={'Montserrat'} >Begin your design journey here.</Typography>
           </motion.header>
         )}
       </AnimatePresence>

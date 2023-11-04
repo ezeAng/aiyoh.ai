@@ -4,7 +4,7 @@ import { Button, Box, Modal, Typography } from '@mui/material';
 import { GridLoader } from 'react-spinners';
 import { modalStyle, loaderStyle, resultHeaderStyle, resultStyle, paperStyle, btnContStyle, homeBtnStyle, generalStyles } from '../../styles/style.js';
 import { OpenAI } from 'openai';
-import img from '../../images/tree.png';
+import img from "../../images/tree.png";
 
 const openai = new OpenAI({
   apiKey: process.env.REACT_APP_API_KEY, 
@@ -15,6 +15,8 @@ const openai = new OpenAI({
 
 const Results = ({results, showBegin}) => {
 
+  console.log("Results Mounted:", results);
+
   const navigate = useNavigate();
   const navigateToHome = () => {
     showBegin();
@@ -23,21 +25,37 @@ const Results = ({results, showBegin}) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [finalRes, setFinalRes] = useState(img);
+  const [finalRes, setFinalRes] = useState("");
+  const [gettingImg, setGettingImg] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleDownload = () => {
-    // Create a new anchor element dynamically
-    const anchor = document.createElement('a');
-    anchor.href = finalRes;
-    // Optionally set a filename for the downloaded image
-    anchor.download = 'downloadedImage.png'; // You can set your own image name and extension
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    window.open(finalRes, '_blank');
+    // try {
+    //   // Fetch the image from the finalRes URL
+    //   const response = await fetch(finalRes);
+    //   // Create a blob from the response
+    //   const imageBlob = await response.blob();
+    //   // Create an object URL for the blob
+    //   const imageObjectURL = URL.createObjectURL(imageBlob);
+  
+    //   // Create a new anchor element and trigger the download
+    //   const anchor = document.createElement('a');
+    //   anchor.href = imageObjectURL;
+    //   anchor.download = 'downloadedImage.png'; // Set the name of the downloaded file
+    //   document.body.appendChild(anchor); // Append the anchor to the body
+    //   anchor.click(); // Programmatically click the anchor to trigger the download
+    //   document.body.removeChild(anchor); // Remove the anchor after triggering the download
+  
+    //   // Clean up the object URL to avoid memory leaks
+    //   URL.revokeObjectURL(imageObjectURL);
+    // } catch (error) {
+    //   console.error('Error during image download', error);
+    //   // You can display an error message to the user here if needed
+    // }
   };
 
   var roomType = ['studio'];
@@ -52,7 +70,7 @@ const Results = ({results, showBegin}) => {
 
   var styles = ["No specific style"];
   if (results['styles']) {
-    styles = results['styles'].join(',');
+    styles = results['styles'].join(', ');
   }
   
   //Create GPT PRompt
@@ -64,18 +82,14 @@ const Results = ({results, showBegin}) => {
     Use IKEA products for the furnishing and lighting and make the image as realistic as possible.
   .`;
 
-  // const prompt_options = {
-  //   0 : `After which, tell me 5 possible career paths I can take. `,
-  //   1 : `After which, tell me 5 possible steps I can take. `
-  // };
+  const final_prompt = prompt;
 
-  const tone = "Respond simply in the tone of a interior designer, in less than 100 words.";
 
-  var final_prompt = prompt + tone;
 
   useEffect(() => {
+    console.log("Getting res")
     getOpenAIResult(final_prompt);
-    return;
+    
   },[]);
 
 
@@ -83,26 +97,33 @@ const Results = ({results, showBegin}) => {
   async function getOpenAIResult(prompt) {
     try {
       console.log("Getting...")
-      // const response = await openai.images.generate({
-      //   prompt: prompt,
-      //   n : 1,
-      //   size: "1024x1024"
-      // });
+      const response = await openai.images.generate({
+        prompt: prompt,
+        n : 1,
+        size: "1024x1024"
+      });
       
-      // console.log("Response",response);
-      // var image_url = response.data[0].url;
-      var image_url = img;
-
-
-      // if (response) {
+      console.log("Response",response);
+      
+      if (response) {
+        var image_url = response.data[0].url;
+        console.log("Completed")
+        setFinalRes(image_url);
+        setIsLoading(false);
+        return response;
+      } else {
+        return null;
+      }
+      // if (img) {
+      //   var image_url = img;
       //   console.log("Completed")
       //   setFinalRes(image_url);
       //   setIsLoading(false);
+      //   return img;
+      // } else {
+      //   return null;
       // }
-        setFinalRes(image_url);
-        setIsLoading(false);
       
-      return img;
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -110,10 +131,6 @@ const Results = ({results, showBegin}) => {
       return null;
     }
   }
-
-
-
-
 
   return (
       <div>

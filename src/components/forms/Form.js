@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 
 import FormPageA from './FormPageA';
@@ -126,9 +126,9 @@ const Form = ({showBegin, navigateToResults, showHeader}) => {
         setData(newData);
     }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
-
+        console.log("Submitting data and redirecting to results")
         //Can collect data here using dbContext [not used for furnish atm.]
 
         //Send data to results to pass to GPT
@@ -138,7 +138,7 @@ const Form = ({showBegin, navigateToResults, showHeader}) => {
     const steps = [
       'Room Layout',
       'Style choice',
-      'What you need'
+      'Generate'
     ];
 
 
@@ -171,7 +171,7 @@ const Form = ({showBegin, navigateToResults, showHeader}) => {
 
                     {page === 0 ? <FormPageA formData={data} updateFormData={setFormData} /> : null}
                     {page === 1 ? <FormPageD formData={data} updateFormData={setFormData} /> : null}
-                    {page === 2 ? <FormPageSubmit formData={data} updateFormData={setFormData} /> : null}
+                    {page === 2 ? <FormPageSubmit /> : null}
                     <motion.div
                       initial={{ opacity: 0}}
                       animate={{ opacity: 1}}
@@ -190,8 +190,7 @@ const Form = ({showBegin, navigateToResults, showHeader}) => {
                       {page === formCount - 1 ? 
                           <div className='form-button-bar'>
                               <Button sx={btnStyle} onClick={movePageBackward}><Typography fontSize={18} fontFamily={'Montserrat'}>Back</Typography></Button>
-                              
-                              <Button sx={submitBtnStyle} type='submit'><Typography fontSize={18} fontFamily={'Montserrat'}>Submit</Typography></Button>
+                              <Button sx={submitBtnStyle} type='submit'><Typography fontSize={18} fontFamily={'Montserrat'}>Let's Go.</Typography></Button>
                           </div> 
                       : null }
                     </div>

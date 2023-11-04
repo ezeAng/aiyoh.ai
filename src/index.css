@@ -142,8 +142,9 @@ padding: 5px;
 }
 
 img {
-  width: 40vw;
+  width: 50vw;
+  height: 45vh;
   border-radius: 2rem;
-  transform: scale(0.9);
+  transform: scale(0.75);
   border: 4px solid rgb(249, 241, 225);
 }

@@ -19,16 +19,17 @@ const FormPageA = ({ formData, updateFormData}) => {
   };
   const boxStyle = { 
     width: 0.8, display: 'block', margin: 'auto',
-    marginBottom: 3,
+    marginBottom: "5rem",
     justifyContent: 'center',
     alignItems: 'center', }
   
-    const headerStyle = {
-      padding: 2,
-      margin: "auto",
-      width: 0.5,
-      height: "fit-content"
-    }
+  const headerStyle = {
+    padding: 2,
+    margin: "auto",
+    width: 0.5,
+    height: "fit-content",
+    marginBottom: "2rem"
+  }
    
   return (
     <div>
