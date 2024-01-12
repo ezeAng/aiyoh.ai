@@ -2,6 +2,8 @@
 
 aiyoh.ai is an inventive web-based application built using ReactJS and powered by Firebase. It utilizes the OpenAI Dall-E API to transform basic room layout floorplans into artistically rendered images of interior spaces, complete with user-selected styles and branded furnishings. This project serves as a tool for interior designers, furniture enthusiasts, and homeowners to envision their spaces in new and exciting ways. We're currently looking for contributors to this project, do add an issue and suggest new features!
 
+Check the website [here](https://aiyoh-ai.web.app/)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
