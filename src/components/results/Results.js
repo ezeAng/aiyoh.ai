@@ -95,7 +95,6 @@ const Results = ({results, showBegin}) => {
   //Do the GPT API Call here
   async function getOpenAIResult(prompt) {
     try {
-      console.log("Getting...")
       const response = await openai.images.generate({
         model: "dall-e-3",
         prompt: prompt,
