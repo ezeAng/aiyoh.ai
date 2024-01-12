@@ -4,7 +4,6 @@ import { Button, Box, Modal, Typography } from '@mui/material';
 import { GridLoader } from 'react-spinners';
 import { modalStyle, loaderStyle, resultHeaderStyle, resultStyle, paperStyle, btnContStyle, homeBtnStyle, generalStyles } from '../../styles/style.js';
 import { OpenAI } from 'openai';
-import img from "../../images/tree.png";
 
 const openai = new OpenAI({
   apiKey: process.env.REACT_APP_API_KEY, 
@@ -98,6 +97,7 @@ const Results = ({results, showBegin}) => {
     try {
       console.log("Getting...")
       const response = await openai.images.generate({
+        model: "dall-e-3",
         prompt: prompt,
         n : 1,
         size: "1024x1024"
